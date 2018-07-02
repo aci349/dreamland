@@ -4,95 +4,75 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
 
-    [SerializeField]
-    private float movementSpeed;                //vertical Player movement speed
+	[SerializeField]
+	private float movementSpeed;                //vertical Player movement speed
+	[SerializeField]
+	private float movementForce;                //force that is added when the player presses one of the general movement keys (w,a,s,d)
 
-    private Rigidbody entityRB;               //reference to the player's Rigidbody
-    private Transform groundCheck;              //reference to the ground check's transform
+	[SerializeField]
+	private float cameraSpeed;                //determines how fast the camera rotates
 
-    private bool grounded;                      //bool to check if the player is on viable ground
-    private bool floating;                      //bool to check if the player is floating
+	private Rigidbody entityRB;               //reference to the player's Rigidbody
+	private Transform groundCheck;              //reference to the ground check's transform
 
-    public bool Grounded
-    {
-        get
-        {
-            return grounded;
-        }
-        set
-        {
-            grounded = value;
-        }
-    }
-    public bool Floating
-    {
-        get
-        {
-            return floating;
-        }
-        set
-        {
-            floating = value;
-        }
-    }
-    public Rigidbody EntityRB
-    {
-        get
-        {
-            return entityRB;
-        }
-        set
-        {
-            entityRB = value;
-        }
-    }
+	private bool grounded;                      //bool to check if the player is on viable ground
 
-    void Start()
+	public bool Grounded
+	{
+		get
+		{
+			return grounded;
+		}
+		set
+		{
+			grounded = value;
+		}
+	}	
+
+	void Start()
 	{
 		entityRB = GetComponent<Rigidbody>();                 //initialize player Rigidbody
 		groundCheck = transform.Find("playerGroundCheck");      //initialize groundCheck Transform
+
+		grounded = true;
 	}
 	
 	void Update ()
 	{
-        //grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+		//grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
-		//if (grounded)
-		//{
-		
-		if (Input.GetKey("a"))
+		if (grounded)
 		{
-			entityRB.velocity = new Vector3(movementSpeed * -1, entityRB.velocity.y, entityRB.velocity.z);
-		}
-		else if (Input.GetKey("d"))
-		{
-			entityRB.velocity = new Vector3(movementSpeed, entityRB.velocity.y, entityRB.velocity.z);
+			if (Input.GetKey("a"))
+			{
+				entityRB.AddForce(-transform.right * movementForce);
+
+			}
+			else if (Input.GetKey("d"))
+			{
+				entityRB.AddForce(transform.right * movementForce);
+			}
+
+			if (Input.GetKey("w"))
+			{
+				entityRB.AddForce(transform.forward * movementForce);
+			}
+			else if (Input.GetKey("s"))
+			{
+				entityRB.AddForce(-transform.forward * movementForce);
+			}
+
+			if (Mathf.Abs(entityRB.velocity.x) > movementSpeed)
+				entityRB.velocity = new Vector3(Mathf.Sign(entityRB.velocity.x) * movementSpeed, entityRB.velocity.y, entityRB.velocity.z);
+			if (Mathf.Abs(entityRB.velocity.z) > movementSpeed)
+				entityRB.velocity = new Vector3(entityRB.velocity.x, entityRB.velocity.y, Mathf.Sign(entityRB.velocity.z) * movementSpeed);
+
 		}
 
-		if (Input.GetKey("w"))
-		{
-			entityRB.velocity = new Vector3(entityRB.velocity.x, entityRB.velocity.y, movementSpeed);
-		}
-		else if (Input.GetKey("s"))
-		{
-			entityRB.velocity = new Vector3(entityRB.velocity.x, entityRB.velocity.y, movementSpeed * -1);
-		}
+		float h = cameraSpeed * Input.GetAxis("Mouse X");
+		float v = -cameraSpeed * Input.GetAxis("Mouse Y");
 
-        if (floating)
-        {
-            if (Input.GetKey("space"))
-            {
-                entityRB.velocity = new Vector3(entityRB.velocity.x, movementSpeed, entityRB.velocity.z);
-            }
-            else if (Input.GetKey("left shift"))
-            {
-                entityRB.velocity = new Vector3(entityRB.velocity.x, -movementSpeed, entityRB.velocity.z);
-            }
-        }
-    }
-
-    public Rigidbody ReturnRigidbody()
-    {
-        return entityRB;
-    }
+		Camera.main.transform.Rotate(v, 0, 0);
+		transform.Rotate(0, h, 0);
+	}
 }
