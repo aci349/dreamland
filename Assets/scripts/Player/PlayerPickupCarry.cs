@@ -29,7 +29,7 @@ public class PlayerPickupCarry : MonoBehaviour {
 	
 	void carry(GameObject o){
 		//o.GetComponent<Rigidbody>().isKinematic = true;
-		o.transform.position = Vector3.Lerp(o.transform.position, mainCamera.transform.position + mainCamera.transform.forward * distance, Time.deltaTime * smooth);
+		o.transform.position = transform.position + transform.forward * distance + -mainCamera.transform.up * 0.3f; //Vector3.Lerp(o.transform.position, mainCamera.transform.position + mainCamera.transform.forward * distance + -mainCamera.transform.up * 0.3f, Time.deltaTime * smooth); 
 	}
 	
 	void pickup(){
@@ -47,6 +47,8 @@ public class PlayerPickupCarry : MonoBehaviour {
 					carrying = true;
 					carriedObject = p.gameObject;
 					p.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+					p.gameObject.GetComponent<BoxCollider>().enabled = false;
+					p.transform.localScale = p.transform.localScale / 2;
 				}
 			}
 		}
@@ -61,6 +63,8 @@ public class PlayerPickupCarry : MonoBehaviour {
 	void dropObject(){
 		carrying = false;
 		carriedObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+		carriedObject.gameObject.GetComponent<BoxCollider>().enabled = true;
+		carriedObject.transform.localScale = carriedObject.transform.localScale * 2;
 		carriedObject = null;
 	}
 }
