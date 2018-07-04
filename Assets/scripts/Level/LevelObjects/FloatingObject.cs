@@ -6,16 +6,16 @@ public class FloatingObject : MonoBehaviour {
 
     private Rigidbody playerRB;
 
+    void Update()
+    {
+        
+    }
+
     private void OnTriggerEnter(Collider col)
     {
         if (col.tag == "Player")
         {
-            if(!playerRB)
-                playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().EntityRB;
-
-            playerRB.useGravity = false;
-            playerRB.velocity = new Vector3(playerRB.velocity.x, 0, playerRB.velocity.z);
-            col.GetComponent<PlayerScript>().Floating = true;
+            col.GetComponent<PlayerScript>().EnterFloating();
         }
     }
 
@@ -23,8 +23,7 @@ public class FloatingObject : MonoBehaviour {
     {
         if (col.tag == "Player")
         {
-            playerRB.useGravity = true;
-            col.GetComponent<PlayerScript>().Floating = false;
+            col.GetComponent<PlayerScript>().ExitFloating();
         }
     }
 }

@@ -16,10 +16,5 @@ public class MainCameraScript : MonoBehaviour {
 	
 	void Update ()
 	{
-		float h = 3 * Input.GetAxis("Mouse X");
-		float v = -3 * Input.GetAxis("Mouse Y");
-		transform.Rotate(v, h, 0);
-
-		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
 	}
 }
