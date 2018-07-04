@@ -22,7 +22,7 @@ public class DoorKey : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                DoorScript.doorKey = true;
+                DoorScripts.doorKey = true;
                 Destroy(this.gameObject);
             }
         }

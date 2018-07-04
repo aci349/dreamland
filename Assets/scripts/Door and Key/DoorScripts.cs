@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DoorScript : MonoBehaviour
+public class DoorScripts : MonoBehaviour
 {
 
     public static bool doorKey;
@@ -29,8 +29,9 @@ public class DoorScript : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        open = true;
+                        //open = true;
                         close = false;
+                        OpenDoor();
                     }
                 }
             }
@@ -39,22 +40,42 @@ public class DoorScript : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     close = true;
-                    open = false;
+                    //open = false;
+                    CloseDoor();
+                   
+
                 }
             }
         }
 
-        if (open)
-        {
-            var newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(90.0f, -90.0f, 0.0f), Time.deltaTime * 200);
-            transform.rotation = newRot;
-        }
-        else
-        {
-            var newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(.0f, 0.0f, 0.0f), Time.deltaTime * 200);
-            transform.rotation = newRot;
-        }
+        /* if (open)
+         {
+             Vector3 newPosition = transform.forward * 5; transform.position = newPosition;
+             //var newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(90.0f, -90.0f, 0.0f), Time.deltaTime * 200);
+             //transform.rotation = newRot;
+         }
+         else
+         {
+             Vector3 newPosition = -transform.forward * 5; transform.position = newPosition;
+             //var newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(.0f, 0.0f, 0.0f), Time.deltaTime * 200);
+             //transform.rotation = newRot;
+         }
+         */
+
     }
+
+
+    void OpenDoor()
+    {
+        Vector3 newPosition = transform.position + transform.right *3; transform.position = newPosition;
+
+    }
+
+    void CloseDoor()
+    {
+        Vector3 newPosition = transform.position + -transform.right * 3; transform.position = newPosition;
+    }
+
 
     void OnGUI()
     {
