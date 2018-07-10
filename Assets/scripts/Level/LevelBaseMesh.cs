@@ -4,6 +4,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter)), RequireComponent(typeof(MeshRenderer))]
 public class LevelBaseMesh : MonoBehaviour {
+	
+	private int rowLength;
+	private int rowAmount;
+
+	private GameObject constructor;
 
 	private Mesh levelMesh;
 	private List<Vector3> verts;
@@ -11,8 +16,15 @@ public class LevelBaseMesh : MonoBehaviour {
 
 	void Start ()
 	{
+		rowLength = 10;
+		rowAmount = 10;
+
+		constructor = new GameObject();
+
 		//Create a new Mesh
 		levelMesh = new Mesh();
+		verts = new List<Vector3>();
+		faces = new List<int>();
 
 		//Create the level architecture
 		BaseLevel();
@@ -28,6 +40,18 @@ public class LevelBaseMesh : MonoBehaviour {
 
 	void BaseLevel()
 	{
+		for (int i = 0; i < rowAmount; i++)
+		{
+			for (int k = 0; k < rowLength; k++)
+			{
+				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+				cube.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+				cube.transform.position = constructor.transform.position;
+
+				verts.Add(constructor.transform.position);
+				constructor.transform.position = new Vector3(i, 0, k);
+			}
+		}
 
 		levelMesh.vertices = verts.ToArray();
 		levelMesh.triangles = faces.ToArray();
