@@ -20,6 +20,8 @@ public class LevelBaseMesh : MonoBehaviour {
 		rowAmount = 10;
 
 		constructor = new GameObject();
+		constructor.name = "Level Mesh";
+		constructor.tag = "Ground";
 
 		//Create a new Mesh
 		levelMesh = new Mesh();
@@ -31,6 +33,7 @@ public class LevelBaseMesh : MonoBehaviour {
 
 		//apply levelMesh to the MeshFilter
 		GetComponent<MeshFilter>().mesh = levelMesh;
+		GetComponent<MeshCollider>().sharedMesh = levelMesh;
 	}
 
 	void DrawVert(Vector3 pos)
@@ -47,9 +50,9 @@ public class LevelBaseMesh : MonoBehaviour {
                 float rand = Random.Range(-1f, 1f);
                 constructor.transform.position = new Vector3(i, rand, k);
 
-                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                /*GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-				cube.transform.position = constructor.transform.position;
+				cube.transform.position = constructor.transform.position;*/
 
 				verts.Add(constructor.transform.position);
 			}
@@ -57,7 +60,6 @@ public class LevelBaseMesh : MonoBehaviour {
 
         for (int i = 0; i < rowAmount -1; i++)
         {
-            Debug.Log("####################: + " + i);
             for (int k = 0; k < rowLength - 1; k++)
             {
                 faces.Add(i * 10 + k);
@@ -72,5 +74,6 @@ public class LevelBaseMesh : MonoBehaviour {
 
         levelMesh.vertices = verts.ToArray();
 		levelMesh.triangles = faces.ToArray();
+		levelMesh.RecalculateNormals();
 	}
 }
