@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4054086152387846}
   - component: {fileID: 33026371414292406}
   - component: {fileID: 23855547076663424}
-  - component: {fileID: 114900717064727580}
+  - component: {fileID: 114408843376694228}
   m_Layer: 0
-  m_Name: Bubble
+  m_Name: Bubble 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199279928714840}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114900717064727580
+--- !u!114 &114408843376694228
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1199279928714840}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08f445e254417ff4fbf57d736bcda8e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b57057b8992bb142aa167f797f8d813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnrange: {fileID: 0}
