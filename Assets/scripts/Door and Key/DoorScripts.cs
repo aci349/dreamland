@@ -9,9 +9,20 @@ public class DoorScripts : MonoBehaviour
     public bool close;
     public bool inTrigger;
 
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "KeyTag")
+        {
+            OpenDoor();
+            Destroy(collision.gameObject);
+        }
+    }
     void OnTriggerEnter(Collider other)
     {
-        inTrigger = true;
+   
+       inTrigger = true;
     }
 
     void OnTriggerExit(Collider other)
@@ -21,7 +32,7 @@ public class DoorScripts : MonoBehaviour
 
     void Update()
     {
-        if (inTrigger)
+        /*if (inTrigger)
         {
             if (close)
             {
@@ -48,7 +59,7 @@ public class DoorScripts : MonoBehaviour
             }
         }
 
-        /* if (open)
+        if (open)
          {
              Vector3 newPosition = transform.forward * 5; transform.position = newPosition;
              //var newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(90.0f, -90.0f, 0.0f), Time.deltaTime * 200);
