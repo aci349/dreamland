@@ -48,36 +48,36 @@ public class PlayerScript : MonoBehaviour {
                     Jump();
             }
 
-            if (Input.GetKey("a"))
-			{
-				entityRB.AddForce(-transform.right * movementForce);
-			}
-			else if (Input.GetKey("d"))
-			{
-				entityRB.AddForce(transform.right * movementForce);
-			}
-
-			if (Input.GetKey("w"))
-			{
-				entityRB.AddForce(transform.forward * movementForce);
-			}
-			else if (Input.GetKey("s"))
-			{
-				entityRB.AddForce(-transform.forward * movementForce);
-			}
-
-			if (Mathf.Abs(entityRB.velocity.x) > movementSpeed)
-				entityRB.velocity = new Vector3(Mathf.Sign(entityRB.velocity.x) * movementSpeed, entityRB.velocity.y, entityRB.velocity.z);
-            if (Mathf.Abs(entityRB.velocity.z) > movementSpeed)
-				entityRB.velocity = new Vector3(entityRB.velocity.x, entityRB.velocity.y, Mathf.Sign(entityRB.velocity.z) * movementSpeed);
-
             if (Input.GetKeyUp("a") || Input.GetKey("d"))
                 entityRB.velocity = new Vector3(entityRB.velocity.x, entityRB.velocity.y, 0);
             if (Input.GetKeyUp("w") || Input.GetKey("s"))
                 entityRB.velocity = new Vector3(0, entityRB.velocity.y, entityRB.velocity.z);
         }
 
-		float h = cameraSpeed * Input.GetAxis("Mouse X");
+        if (Input.GetKey("a"))
+        {
+            entityRB.AddForce(-transform.right * movementForce);
+        }
+        else if (Input.GetKey("d"))
+        {
+            entityRB.AddForce(transform.right * movementForce);
+        }
+
+        if (Input.GetKey("w"))
+        {
+            entityRB.AddForce(transform.forward * movementForce);
+        }
+        else if (Input.GetKey("s"))
+        {
+            entityRB.AddForce(-transform.forward * movementForce);
+        }
+
+        if (Mathf.Abs(entityRB.velocity.x) > movementSpeed)
+            entityRB.velocity = new Vector3(Mathf.Sign(entityRB.velocity.x) * movementSpeed, entityRB.velocity.y, entityRB.velocity.z);
+        if (Mathf.Abs(entityRB.velocity.z) > movementSpeed)
+            entityRB.velocity = new Vector3(entityRB.velocity.x, entityRB.velocity.y, Mathf.Sign(entityRB.velocity.z) * movementSpeed);
+
+        float h = cameraSpeed * Input.GetAxis("Mouse X");
 		float v = -cameraSpeed * Input.GetAxis("Mouse Y");
 
 		Camera.main.transform.Rotate(v, 0, 0);
