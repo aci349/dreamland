@@ -10,7 +10,7 @@ public class MainCameraScript : MonoBehaviour {
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 
-		transform.position = player.transform.position;
+		transform.position = player.transform.position + transform.up * 0.75f;
 		transform.rotation = player.transform.rotation;
 	}
 	
