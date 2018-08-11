@@ -7,12 +7,22 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: pCube1
+    100004: default
     400000: //RootNode
     400002: pCube1
+    400004: default
     2300000: pCube1
+    2300002: default
     3300000: pCube1
+    3300002: default
     4300000: pCube1
+    4300002: default
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 241daf8fec5cbfb43802c65c1e3e5678, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
