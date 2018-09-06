@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPickupCarry : MonoBehaviour {
-	GameObject mainCamera; //playerCamera
+	GameObject mainCamera; 
 	bool carrying;	
-	GameObject carriedObject; //ball
+	GameObject carriedObject; 
 	public float bonbonThrowingForce = 5f;
 	
-	[SerializeField]
-	public float distance;
-	public float smooth;
 
 	// Use this for initialization
 	void Start () {
@@ -32,7 +29,7 @@ public class PlayerPickupCarry : MonoBehaviour {
 	
 	void carry(GameObject o){
 		//o.GetComponent<Rigidbody>().isKinematic = true;
-		o.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distance + -mainCamera.transform.up * 0.3f;  
+		o.transform.position = mainCamera.transform.position + mainCamera.transform.forward * o.GetComponent<PickupCarryCube>().distance + -mainCamera.transform.up * 0.3f;  
 	}
 	
 	void pickup(){
