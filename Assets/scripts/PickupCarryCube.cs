@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PickupCarryCube : MonoBehaviour {
 
+	public float distance;
 
 	// Use this for initialization
 	void Start () {
