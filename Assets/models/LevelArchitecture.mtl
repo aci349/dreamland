@@ -1,22 +1,22 @@
-# Blender MTL File: 'None'
-# Material Count: 2
-
-newmtl LevelArchitecture_initialShadingGroup
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.500000 0.500000 0.500000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 0.000000
-illum 6
-
-newmtl LevelArchitecture_lambert2SG
-Ns 92.156863
-Ka 0.000000 0.000000 0.000000
-Kd 0.050000 0.050000 0.050000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
+newmtl LevelArchitecture_LevelArchitecture_LevelArchitecture_initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 0.00 0.00 0.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 96.08
+newmtl LevelArchitecture_LevelArchitecture_LevelArchitecture_lambert2SG
+illum 4
+Kd 0.05 0.05 0.05
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 92.16
+newmtl lambert2SG
+illum 4
+Kd 0.05 0.05 0.05
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
