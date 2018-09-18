@@ -1,68 +1,33 @@
 fileFormatVersion: 2
-guid: fc3acfa594ef937409107a4fcc0f732a
-timeCreated: 1533853725
+guid: 71aaffa2f59ecc1428787d1e36a71dd1
+timeCreated: 1537212347
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: pCube1
-    100004: default
-    100006: LevelArchitecture_Mesh
-    100008: LevelArchitecture_LevelArchitecture_Mesh
+    100002: default
     400000: //RootNode
-    400002: pCube1
-    400004: default
-    400006: LevelArchitecture_Mesh
-    400008: LevelArchitecture_LevelArchitecture_Mesh
-    2300000: pCube1
-    2300002: default
-    2300004: LevelArchitecture_Mesh
-    2300006: LevelArchitecture_LevelArchitecture_Mesh
-    3300000: pCube1
-    3300002: default
-    3300004: LevelArchitecture_Mesh
-    3300006: LevelArchitecture_LevelArchitecture_Mesh
-    4300000: pCube1
-    4300002: default
-    4300004: LevelArchitecture_Mesh
-    4300006: LevelArchitecture_LevelArchitecture_Mesh
+    400002: default
+    2300000: default
+    3300000: default
+    4300000: default
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: LevelArchitecture_LevelArchitecture_LevelArchitecture_initialShadingGroup
-    second: {fileID: 2100000, guid: b3681241f81bd42468f5d71eb48a1823, type: 2}
+      name: cover
+    second: {fileID: 2100000, guid: 0a0e73fdae1e5a64289aea0a2eda3fe3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: LevelArchitecture_LevelArchitecture_LevelArchitecture_lambert2SG
-    second: {fileID: 2100000, guid: 945d4c7d8289fa64bb5486dc2024da58, type: 2}
+      name: seiten
+    second: {fileID: 2100000, guid: aea9dfcc94b9c94439556fcd72162768, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: LevelArchitecture_LevelArchitecture_initialShadingGroup
-    second: {fileID: 2100000, guid: 167dc5ac8b1e365479962088c604eb2c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: LevelArchitecture_LevelArchitecture_lambert2SG
-    second: {fileID: 2100000, guid: ea50d946a208a194f8a613c2bde56179, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 241daf8fec5cbfb43802c65c1e3e5678, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: initialShadingGroup
-    second: {fileID: 2100000, guid: 6e6e0b17e873b7243a92728ac304110c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert2SG
-    second: {fileID: 2100000, guid: 8a567328a8b47024dad1a054c179df59, type: 2}
+      name: seiten_bookclosedouterpart.jpg
+    second: {fileID: 2100000, guid: 9407bf67220eadb44a5293a12cb81c1e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
