@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter)), RequireComponent(typeof(MeshRenderer))]
 public class Circle : MonoBehaviour {
 
 	private GameObject constructor;
-	private GameObject circleObject;
 
-	private Mesh powderMesh;
+	private Mesh circleMesh;
 	private List<Vector3> verts;
 	private List<int> faces;
 	
@@ -17,40 +17,45 @@ public class Circle : MonoBehaviour {
 	{
 		counter = 0;
 
-		powderMesh = new Mesh();
-		circleObject = new GameObject();
-		circleObject.name = "Circle";
-		circleObject.AddComponent<MeshFilter>();
-		circleObject.AddComponent<MeshRenderer>();
+		circleMesh = new Mesh();
+		circleMesh.name = "PowderMesh";
 
 		verts = new List<Vector3>();
 		faces = new List<int>();
 
-		circleObject.GetComponent<MeshFilter>().mesh = powderMesh;
-		
-		constructor = new GameObject();
+		GetComponent<MeshFilter>().mesh = circleMesh;
 
-		DrawCircle();
+		constructor = new GameObject();
+		constructor.name = "Circle Mesh Constructor";
+
+		DrawCircle(5);
 	}
 
-	void DrawCircle()
+	void DrawCircle(int deg)
 	{
-		DrawLine();
-		DrawLine();
-		DrawLine();
-		DrawLine();
-		DrawLine();
+		int cycles = (360 / deg);
+
+		for (int i = 0; i < cycles; i++)
+		{
+			DrawLine();
+			Turn(deg);
+		}
+	}
+
+	void Turn(float angle)
+	{
+		constructor.transform.Rotate(new Vector3(0, angle, 0));
 	}
 
 	void DrawLine()
 	{
-		verts.Insert(counter, constructor.transform.position + constructor.transform.right * 0.25f);
-		verts.Insert(counter + 1, constructor.transform.position - constructor.transform.right * 0.25f);
+		verts.Add(constructor.transform.position + constructor.transform.forward * 0.25f);
+		verts.Add(constructor.transform.position - constructor.transform.forward * 0.25f);
 
-		constructor.transform.Translate(1, 0, 0);
+		constructor.transform.Translate(0.5f, 0, 0);
 
-		verts.Insert(counter, constructor.transform.position + constructor.transform.right * 0.25f);
-		verts.Insert(counter + 1, constructor.transform.position - constructor.transform.right * 0.25f);
+		verts.Add(constructor.transform.position + constructor.transform.forward * 0.25f);
+		verts.Add(constructor.transform.position - constructor.transform.forward * 0.25f);
 
 		faces.Add(counter + 0);
 		faces.Add(counter + 1);
@@ -70,7 +75,7 @@ public class Circle : MonoBehaviour {
 
 		counter += 4;
 
-		powderMesh.vertices = verts.ToArray();
-		powderMesh.triangles = faces.ToArray();
+		circleMesh.vertices = verts.ToArray();
+		circleMesh.triangles = faces.ToArray();
 	}
 }

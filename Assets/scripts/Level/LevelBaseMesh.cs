@@ -21,7 +21,7 @@ public class LevelBaseMesh : MonoBehaviour {
 		rowAmount = 10;
 
 		constructor = new GameObject();
-		constructor.name = "Level Mesh";
+		constructor.name = "Level Mesh Constructor";
 		constructor.tag = "Ground";
 
 		//Create a new Mesh

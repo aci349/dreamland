@@ -20,7 +20,7 @@ public class HoneyMesh : MonoBehaviour {
 		rowAmount = 10;
 
 		constructor = new GameObject();
-		constructor.name = "Level Mesh";
+		constructor.name = "Honey Mesh Constructor";
 		constructor.tag = "Ground";
 
 		//Create a new Mesh

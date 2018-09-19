@@ -19,6 +19,7 @@ public class GlassBarriers : MonoBehaviour {
 	{
 		if (active)
 		{
+			transform.Translate(0, -Time.deltaTime * 2, 0);
 		}
 	}
 
