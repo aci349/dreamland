@@ -13,6 +13,7 @@ public class LevelBaseMesh : MonoBehaviour {
 	private Mesh levelMesh;
 	private List<Vector3> verts;
 	private List<int> faces;
+	private List<Vector2> uvs;
 
 	void Start ()
 	{
@@ -28,6 +29,7 @@ public class LevelBaseMesh : MonoBehaviour {
 		levelMesh = new Mesh();
 		verts = new List<Vector3>();
 		faces = new List<int>();
+		uvs = new List<Vector2>();
 
 		//Create the level architecture
 		BaseLevel();
@@ -56,6 +58,7 @@ public class LevelBaseMesh : MonoBehaviour {
                 float rand = Random.Range(-1f, 1f);
                 constructor.transform.position = new Vector3(i, rand - offset, k);
 
+				uvs.Add(new Vector2(i, k));
 				verts.Add(constructor.transform.position);
 			}
 		}
@@ -77,6 +80,7 @@ public class LevelBaseMesh : MonoBehaviour {
 
         levelMesh.vertices = verts.ToArray();
 		levelMesh.triangles = faces.ToArray();
+		levelMesh.uv = uvs.ToArray();
 		levelMesh.RecalculateNormals();
 	}
 }
