@@ -12,10 +12,14 @@ public class Powder : MonoBehaviour {
 	private Mesh powderMesh;
 	private List<Vector3> verts;
 	private List<int> faces;
+	private List<Vector2> uvs;
 
 	private GameObject powderObject;
-	private Rigidbody playerRB;
-	private Transform playerTransform;
+	private Rigidbody playerRB;					//reference to player rigidbody
+	private Transform playerTransform;          //reference to player transform
+
+	[SerializeField]
+	private Material mat;
 
 	void Start ()
 	{
@@ -27,21 +31,26 @@ public class Powder : MonoBehaviour {
 		inUse = true;
 		counter = 0;
 
+		//create the gameObject which will hold the mesh
 		powderMesh = new Mesh();
 		powderObject = new GameObject();
 		powderObject.name = "Powder";
 		powderObject.AddComponent<MeshFilter>();
 		powderObject.AddComponent<MeshRenderer>();
+		powderObject.GetComponent<MeshFilter>().mesh = powderMesh;
+		powderObject.GetComponent<Renderer>().material = mat;
 
 		verts = new List<Vector3>();
 		faces = new List<int>();
+		uvs = new List<Vector2>();
 
-		powderObject.GetComponent<MeshFilter>().mesh = powderMesh;
-
+		//first set of vertices and uv coordinates
 		verts.Insert(counter, new Vector3(playerTransform.position.x, -11.65f, playerRB.transform.position.z) + playerTransform.right * 0.25f);
 		verts.Insert(counter + 1, new Vector3(playerTransform.position.x, -11.65f, playerRB.transform.position.z) - playerTransform.right * 0.25f);
+		uvs.Add(new Vector2(0, 0));
+		uvs.Add(new Vector2(1, 0));
 
-		counter += 2;
+		counter += 2; 
 	}
 
 	void Update()
@@ -60,6 +69,24 @@ public class Powder : MonoBehaviour {
 	public void StartUse()
 	{
 		inUse = true;
+
+		//create the gameObject which will hold the mesh
+		powderMesh = new Mesh();
+		powderObject = new GameObject();
+		powderObject.name = "Powder";
+		powderObject.AddComponent<MeshFilter>();
+		powderObject.AddComponent<MeshRenderer>();
+		powderObject.GetComponent<MeshFilter>().mesh = powderMesh;
+		powderObject.GetComponent<Renderer>().material = mat;
+
+		//first set of vertices and uv coordinates
+		verts.Add(new Vector3(playerTransform.position.x, -11.65f, playerTransform.position.z + 0.25f));
+		verts.Add(new Vector3(playerTransform.position.x, -11.65f, playerTransform.position.z - 0.25f));
+		uvs.Add(new Vector2(0, 0));
+		uvs.Add(new Vector2(1, 0));
+
+		counter += 2;
+
 	}
 
 	public void EndUse()
@@ -67,12 +94,33 @@ public class Powder : MonoBehaviour {
 		inUse = false;
 	}
 
+	public void Terminate()
+	{
+		inUse = false;
+		counter = 0;
+		Destroy(powderObject);
+	}
+
+	public bool checkUse()
+	{
+		return inUse;
+	}
+
 	void DrawLine()
 	{
-		Debug.Log("TESTDRAW");
-
-		verts.Insert(counter, new Vector3 (playerTransform.position.x, -11.65f, playerRB.transform.position.z) + playerTransform.right * 0.25f);
-		verts.Insert(counter + 1, new Vector3(playerTransform.position.x, -11.65f, playerRB.transform.position.z) - playerTransform.right * 0.25f);
+		verts.Add(new Vector3(playerTransform.position.x, -11.65f, playerTransform.position.z + 0.25f));
+		verts.Add(new Vector3(playerTransform.position.x, -11.65f, playerTransform.position.z - 0.25f));
+	
+		if (counter % 4 == 0)
+		{
+			uvs.Add(new Vector2(1, 1));
+			uvs.Add(new Vector2(0, 1));
+		}
+		else
+		{
+			uvs.Add(new Vector2(1, 0));
+			uvs.Add(new Vector2(0, 0));
+		}
 
 		faces.Add(counter - 2);
 		faces.Add(counter - 1);
@@ -94,5 +142,6 @@ public class Powder : MonoBehaviour {
 
 		powderMesh.vertices = verts.ToArray();
 		powderMesh.triangles = faces.ToArray();
+		powderMesh.uv = uvs.ToArray();
 	}
 }

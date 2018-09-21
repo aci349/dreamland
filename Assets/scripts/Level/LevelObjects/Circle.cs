@@ -10,7 +10,8 @@ public class Circle : MonoBehaviour {
 	private Mesh circleMesh;
 	private List<Vector3> verts;
 	private List<int> faces;
-	
+	private List<Vector2> uvs;
+
 	private int counter;
 
 	void Start ()
@@ -22,6 +23,7 @@ public class Circle : MonoBehaviour {
 
 		verts = new List<Vector3>();
 		faces = new List<int>();
+		uvs = new List<Vector2>();
 
 		GetComponent<MeshFilter>().mesh = circleMesh;
 
@@ -31,6 +33,7 @@ public class Circle : MonoBehaviour {
 		DrawCircle(5);
 	}
 
+	//draw a circle by creating new squares with each step, rotating the next square by deg degrees
 	void DrawCircle(int deg)
 	{
 		int cycles = (360 / deg);
@@ -51,19 +54,15 @@ public class Circle : MonoBehaviour {
 	{
 		verts.Add(constructor.transform.position + constructor.transform.forward * 0.25f);
 		verts.Add(constructor.transform.position - constructor.transform.forward * 0.25f);
+		uvs.Add(new Vector2(0, 0));
+		uvs.Add(new Vector2(1, 0));
 
 		constructor.transform.Translate(0.5f, 0, 0);
 
 		verts.Add(constructor.transform.position + constructor.transform.forward * 0.25f);
 		verts.Add(constructor.transform.position - constructor.transform.forward * 0.25f);
-
-		faces.Add(counter + 0);
-		faces.Add(counter + 1);
-		faces.Add(counter + 2);
-
-		faces.Add(counter + 2);
-		faces.Add(counter + 1);
-		faces.Add(counter + 3);
+		uvs.Add(new Vector2(0, 1));
+		uvs.Add(new Vector2(1, 1));
 
 		faces.Add(counter + 0);
 		faces.Add(counter + 2);
@@ -77,5 +76,7 @@ public class Circle : MonoBehaviour {
 
 		circleMesh.vertices = verts.ToArray();
 		circleMesh.triangles = faces.ToArray();
+		circleMesh.uv = uvs.ToArray();
+		circleMesh.RecalculateNormals();
 	}
 }
