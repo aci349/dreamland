@@ -3,14 +3,19 @@ using System.Collections;
 
 public class DoorScripts : MonoBehaviour
 {
+	private GameObject eventTarget;
 
     public static bool doorKey;
     public bool open;
     public bool close;
     public bool inTrigger;
 
+	void Start()
+	{
+		eventTarget = GameObject.Find("GlassBarriers");
+	}
 
-
+	//nur mit schlüssel geht die tür dann auf
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "KeyTag")
@@ -75,18 +80,21 @@ public class DoorScripts : MonoBehaviour
 
     }
 
-
+	//Tür bewegt sich in die 3D dimensionale welt
     void OpenDoor()
     {
-        Vector3 newPosition = transform.position + transform.right *3; transform.position = newPosition;
+		//Vector3 newPosition = transform.position + transform.right *3; transform.position = newPosition;
+		Destroy(this.transform.parent.gameObject);
 
+		eventTarget.GetComponent<GlassBarriers>().Activate();
     }
 
     void CloseDoor()
     {
         Vector3 newPosition = transform.position + -transform.right * 3; transform.position = newPosition;
     }
-
+	
+	//kleine UI für Spieler die Schlüssel besitzt
 
     void OnGUI()
     {
