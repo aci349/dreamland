@@ -1,22 +1,24 @@
-newmtl LevelArchitecture_LevelArchitecture_LevelArchitecture_initialShadingGroup
-illum 4
-Kd 0.50 0.50 0.50
-Ka 0.00 0.00 0.00
-Tf 0.00 0.00 0.00
-Ni 1.00
-Ks 0.50 0.50 0.50
-Ns 96.08
-newmtl LevelArchitecture_LevelArchitecture_LevelArchitecture_lambert2SG
-illum 4
-Kd 0.05 0.05 0.05
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
-Ks 0.50 0.50 0.50
-Ns 92.16
-newmtl lambert2SG
-illum 4
-Kd 0.05 0.05 0.05
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
+# Blender MTL File: 'LevelArchitectureR.blend'
+# Material Count: 2
+
+newmtl leveltextures
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd leveltextures.jpg
+
+newmtl leveltextures_NONE
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd leveltextures.jpg
