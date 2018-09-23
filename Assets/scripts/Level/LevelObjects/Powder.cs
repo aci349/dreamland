@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Powder : MonoBehaviour {
 
-	private bool inUse;
+	private bool inUse;							//check if the Powder is being used
 	private float timer;						//timer to check for next drawing Interval
 	private float drawingIntveral;              //time interval between updates of the drawn mesh
-	private int counter;
+	private int counter;						//counter to check if first or second set of UV coordinates has to be used
 
-	private Mesh powderMesh;
-	private List<Vector3> verts;
-	private List<int> faces;
-	private List<Vector2> uvs;
+	private Mesh powderMesh;					//holds the generated mesh
+	private List<Vector3> verts;				//holds world coordinates of the vertices
+	private List<int> faces;					//holds integers to generate the faces of the mesh
+	private List<Vector2> uvs;					//holds uv coordinates for each vertex
 
-	private GameObject powderObject;
+	private GameObject powderObject;			//GameObject with the generated mesh
 	private Rigidbody playerRB;					//reference to player rigidbody
 	private Transform playerTransform;          //reference to player transform
 
@@ -28,8 +28,28 @@ public class Powder : MonoBehaviour {
 
 		timer = 0;
 		drawingIntveral = 0.25f;
-		inUse = true;
+		inUse = false;
 		counter = 0;
+	}
+
+	void Update()
+	{
+		timer += Time.deltaTime;
+		if (inUse && timer >= drawingIntveral)		//if the powder is in use, draw a new line every 'drawingIntveral' seconds
+		{
+			if (Mathf.Abs(playerRB.velocity.x) > 0.1f || Mathf.Abs(playerRB.velocity.z) > 0.1f)		//do not draw, if player is not or barely moving
+			{
+				DrawLine();
+				timer = 0;
+			}
+		}
+	}
+
+	//Initiates the powderMesh generation
+	public void StartUse()
+	{
+		inUse = true;
+		transform.Rotate(150, 0, 0);
 
 		//create the gameObject which will hold the mesh
 		powderMesh = new Mesh();
@@ -45,41 +65,6 @@ public class Powder : MonoBehaviour {
 		uvs = new List<Vector2>();
 
 		//first set of vertices and uv coordinates
-		verts.Insert(counter, new Vector3(playerTransform.position.x, -11.65f, playerRB.transform.position.z) + playerTransform.right * 0.25f);
-		verts.Insert(counter + 1, new Vector3(playerTransform.position.x, -11.65f, playerRB.transform.position.z) - playerTransform.right * 0.25f);
-		uvs.Add(new Vector2(0, 0));
-		uvs.Add(new Vector2(1, 0));
-
-		counter += 2; 
-	}
-
-	void Update()
-	{
-		timer += Time.deltaTime;
-		if (inUse && timer >= drawingIntveral)
-		{
-			if (Mathf.Abs(playerRB.velocity.x) > 0.1f || Mathf.Abs(playerRB.velocity.z) > 0.1f)
-			{
-				DrawLine();
-				timer = 0;
-			}
-		}
-	}
-
-	public void StartUse()
-	{
-		inUse = true;
-
-		//create the gameObject which will hold the mesh
-		powderMesh = new Mesh();
-		powderObject = new GameObject();
-		powderObject.name = "Powder";
-		powderObject.AddComponent<MeshFilter>();
-		powderObject.AddComponent<MeshRenderer>();
-		powderObject.GetComponent<MeshFilter>().mesh = powderMesh;
-		powderObject.GetComponent<Renderer>().material = mat;
-
-		//first set of vertices and uv coordinates
 		verts.Add(new Vector3(playerTransform.position.x, -11.65f, playerTransform.position.z + 0.25f));
 		verts.Add(new Vector3(playerTransform.position.x, -11.65f, playerTransform.position.z - 0.25f));
 		uvs.Add(new Vector2(0, 0));
@@ -89,14 +74,20 @@ public class Powder : MonoBehaviour {
 
 	}
 
+	//Called after completing the ritual, allows player to drop the object
 	public void EndUse()
 	{
 		inUse = false;
+		transform.Rotate(150, 0, 0);
+		tag = "Untagged";
 	}
 
+	//Cancels the powderMesh generation and resets inUse state
 	public void Terminate()
 	{
 		inUse = false;
+		transform.Rotate(-150, 0, 0);
+
 		counter = 0;
 		Destroy(powderObject);
 	}
@@ -106,6 +97,7 @@ public class Powder : MonoBehaviour {
 		return inUse;
 	}
 
+	//Generate vertices, faces and uv coordinates based on the player's position and add them to the mesh
 	void DrawLine()
 	{
 		verts.Add(new Vector3(playerTransform.position.x, -11.65f, playerTransform.position.z + 0.25f));

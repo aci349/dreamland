@@ -5,23 +5,27 @@ using UnityEngine;
 public class Candles : MonoBehaviour {
 
 	private Light candleLight;
+	private GameObject powder;
 
 	[SerializeField]
-	private float number;
+	private int number;
 
 	void Start()
 	{
 		candleLight = GetComponentInChildren<Light>();
+		powder = GameObject.Find("SackOfPowder");
+		LightControl(false);
 	}
 
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.tag == "Player")
+		if (col.tag == "Player" && powder.GetComponent<Powder>().checkUse())
 		{
-			Debug.Log("Activated Candle " + number);
+			GameObject.Find("Ritual").GetComponent<Ritual>().SetStage(number);
 		}
 	}
 
+	//Turn light on or off
 	public void LightControl(bool on)
 	{
 		if (on)
