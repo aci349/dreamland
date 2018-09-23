@@ -118,7 +118,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FloatingObject
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Enter_Glass
 7c842e2f70f624597be82a592acd1dc2 Assembly-CSharp.dll:.Target
-db5095d28516f193f051b4f8faa2289b Assembly-CSharp.dll:.Candles
+282e4d274dc624ee6104c9f894ec925c Assembly-CSharp.dll:.Candles
 7e4c900dc6f26d89b31c376c1ed071e3 Assembly-CSharp.dll:.DoorKey
 4528c5799093587b0ffab0c674c74cd1 Assembly-CSharp.dll:.LastDoorScript
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -153,6 +153,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainCameraScript
 1665cd34b7d03a0c1817cc1e811b59bb Assembly-CSharp.dll:.PlayerScript
+69af58b527aeb887d4688e3ce4f979d8 Assembly-CSharp.dll:.smoke
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Circle
 689302d072605cdb5cdd46987e85babb Assembly-CSharp.dll:.Mentos
 01a149e595f3ecdb6b91f4e182e98021 Assembly-CSharp.dll:.PlayerPickupCarry
