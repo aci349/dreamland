@@ -7,16 +7,21 @@ public class PlayerPickupCarry : MonoBehaviour {
 	bool carrying;	
 	GameObject carriedObject; 
 	public float bonbonThrowingForce = 5f;
-	
+	private GameObject spawner;
+	private GameObject ritual;
+
 
 	// Use this for initialization
 	void Start () {
+		spawner = GameObject.Find("BonbonSpawner");
+		ritual = GameObject.Find("Ritual");
 		mainCamera = GameObject.FindWithTag("MainCamera");
 		/*if (carriedObject)
 			carriedObject.GetComponent<Rigidbody>().useGravity = false;*/
 	}
 	
 	// Update is called once per frame 
+	//es wird überprüft ob bereits ein Objekt getragen wird 
 	void Update () {
 		if(carrying){
 			carry(carriedObject);
@@ -27,13 +32,14 @@ public class PlayerPickupCarry : MonoBehaviour {
 		}
 	}
 	
+	//Objekt wird aufgehoben und bei Bewegung mittig unten vor Kamera mitgeführt
 	void carry(GameObject o){
 		//o.GetComponent<Rigidbody>().isKinematic = true;
 		o.transform.position = mainCamera.transform.position + mainCamera.transform.forward * o.GetComponent<PickupCarryCube>().distance + -mainCamera.transform.up * 0.3f;  
 	}
 	
+	//Objekt wird aufgehoben und verkleinert 
 	void pickup(){
-		
 		if(Input.GetKeyDown(KeyCode.E)){ 
 				Debug.Log("TestPickup");
 				int x = Screen.width / 2;
@@ -49,12 +55,13 @@ public class PlayerPickupCarry : MonoBehaviour {
 						carriedObject = p.gameObject;
 						p.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 						p.gameObject.GetComponent<BoxCollider>().enabled = false;
-						p.transform.localScale = p.transform.localScale / 2;
+						p.transform.localScale = p.transform.localScale / 3;
 					}
 				}
 		}
 	}
 	
+	//hier wird überprüft welches Objekt geworfen oder geschluckt werden kann und jeweils die zugehörige Funktion ausgeführt 
 	void checkDrop(){
 		if(Input.GetKeyDown(KeyCode.E)){
 			if(carriedObject.tag == "werfen"){
@@ -64,6 +71,17 @@ public class PlayerPickupCarry : MonoBehaviour {
 			else if(carriedObject.tag == "schlucken"){
 				Debug.Log("TestSchlucken");
 				schlucken();
+			}
+			else if (carriedObject.tag == "powder")
+			{
+				if (!carriedObject.GetComponent<Powder>().checkUse())
+				{
+					carriedObject.GetComponent<Powder>().StartUse();
+				}
+				else
+				{
+					carriedObject.GetComponent<Powder>().Terminate();
+				}
 			}
 			else
 			dropObject();
@@ -78,6 +96,7 @@ public class PlayerPickupCarry : MonoBehaviour {
 		dropObject();
 		carriedObject.GetComponent<Rigidbody>().AddForce(mainCamera.transform.forward * bonbonThrowingForce);
 		carriedObject = null;
+		spawner.GetComponent<ProjectileSpawner>().ReduceCount();
 	}
 	
 	void schlucken(){
@@ -86,13 +105,15 @@ public class PlayerPickupCarry : MonoBehaviour {
 		dropObject();
 		Destroy(carriedObject);
 		carriedObject = null;
+		ritual.GetComponent<Ritual>().InitiateRitual();
 	}
 	
+	//loslassen; Objekt wird wieder vergrößert 
 	void dropObject(){
 		carrying = false;
 		carriedObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
 		carriedObject.gameObject.GetComponent<BoxCollider>().enabled = true;
-		carriedObject.transform.localScale = carriedObject.transform.localScale * 2;
+		carriedObject.transform.localScale = carriedObject.transform.localScale * 3;
 		
 		if (carriedObject.tag != "werfen" && carriedObject.tag != "schlucken")
 		carriedObject = null;
